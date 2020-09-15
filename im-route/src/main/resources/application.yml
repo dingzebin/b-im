@@ -1,0 +1,54 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: im-route
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: 123456
+    timeout: 3000
+    lettuce:
+      pool:
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+  datasource:
+    druid:
+      #连接信息
+      url: jdbc:mysql://localhost:3306/im?useSSL=false&serverTimezone=GMT%2B8&useAffectedRows=true&useUnicode=true&characterEncoding=utf-8&rewriteBatchedStatements=true&useSSL=false&autoReconnect=true
+      username: root
+      password: password
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      #连接池配置
+      min-idle: 5
+      initial-size: 5
+      max-active: 100
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 30000
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      #监控
+      filter:
+        wall:
+          enabled: true
+
+#mybatis-plus配置
+mybatis-plus:
+  #xml地址
+  mapper-locations:
+    - classpath:mapper/*.xml
+  #实体扫描
+  type-aliases-package: com.zq.*.entity
+
+# im configuration
+im:
+  aes-key: Bnw3NmDk89LsLx0Z
