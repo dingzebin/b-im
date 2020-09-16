@@ -1,6 +1,5 @@
 package com.zq.common.configuration;
 
-import com.zq.common.exception.AuthFailureException;
 import com.zq.common.exception.BizException;
 import com.zq.common.utils.Result;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
-
-    @ExceptionHandler(AuthFailureException.class)
-    @ResponseBody
-    public Result authFailureException(Exception e) {
-        return Result.failed(e.getMessage());
-    }
 
     @ExceptionHandler(BizException.class)
     @ResponseBody

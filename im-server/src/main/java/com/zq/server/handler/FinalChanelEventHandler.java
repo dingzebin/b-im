@@ -1,11 +1,13 @@
 package com.zq.server.handler;
 
+import com.zq.common.utils.Result;
 import com.zq.server.constant.CommandType;
 import com.zq.server.model.Request;
 import com.zq.server.utils.SessionHolder;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import org.springframework.util.StringUtils;
 
 import java.util.Objects;
 
@@ -21,7 +23,6 @@ public class FinalChanelEventHandler extends SimpleChannelInboundHandler<Request
     protected void channelRead0(ChannelHandlerContext ctx, Request request) throws Exception {
         // 登录验证
         if (Objects.equals(request.getCode(), CommandType.LOGIN)) {
-            String token = request.getBody();
         }
     }
 

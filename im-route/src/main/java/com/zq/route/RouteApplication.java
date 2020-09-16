@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @createTime 2020/9/11 16:44
  */
 @SpringBootApplication(scanBasePackages = "com.zq")
-@MapperScan("com.zq.route.mapper")
 public class RouteApplication {
     public static void main(String[] args) {
         SpringApplication.run(RouteApplication.class, args);

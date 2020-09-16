@@ -1,6 +1,7 @@
 package com.zq.server.server;
 
 import com.zq.server.coder.WebSocketMessageDecoder;
+import com.zq.server.coder.WebSocketMessageEncoder;
 import com.zq.server.config.IMConfiguration;
 import com.zq.server.handler.FinalChanelEventHandler;
 import io.netty.bootstrap.ServerBootstrap;
@@ -69,8 +70,8 @@ public class IMServer {
                 ch.pipeline().addLast(new ChannelHandler[]{new HttpObjectAggregator(65536)});
                 ch.pipeline().addLast(new ChannelHandler[]{new WebSocketServerProtocolHandler("/websocket")});
                 ch.pipeline().addLast(new ChannelHandler[]{new WebSocketMessageDecoder()});
+                ch.pipeline().addLast(new ChannelHandler[]{new WebSocketMessageEncoder()});
                 ch.pipeline().addLast(new ChannelHandler[]{new LoggingHandler(LogLevel.INFO)});
-
                 ch.pipeline().addLast(new ChannelHandler[]{new FinalChanelEventHandler()});
             }
         });

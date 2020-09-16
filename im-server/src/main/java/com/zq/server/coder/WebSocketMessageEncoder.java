@@ -1,6 +1,5 @@
 package com.zq.server.coder;
 
-import com.zq.server.model.Response;
 import com.google.gson.Gson;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageEncoder;
