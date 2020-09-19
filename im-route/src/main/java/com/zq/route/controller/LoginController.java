@@ -4,6 +4,7 @@ import com.zq.common.constant.GlobalConstant;
 import com.zq.common.model.UserInfo;
 import com.zq.common.utils.RedisUtil;
 import com.zq.common.utils.Result;
+import com.zq.common.utils.TokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class LoginController {
         if (redisUtil.get(GlobalConstant.TOKEN_PREFIX + user.getAccount()) != null) {
             return Result.failed("账号已存在");
         }
-        redisUtil.set(GlobalConstant.TOKEN_PREFIX + user.getAccount(), user, -1);
+        TokenUtil.setUser(user);
         return Result.ok();
     }
 }

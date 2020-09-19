@@ -54,10 +54,13 @@ public class Result<T> {
         return result;
     }
 
+    public static Result loginFailed() {
+        return restResult(null, StatusCode.LOGIN_FAILED);
+    }
 
 
     private enum StatusCode {
-        SUCCESS(1, "操作成功"), FAILED(0, "操作失败");
+        SUCCESS(1, "操作成功"), FAILED(0, "操作失败"), LOGIN_FAILED(-1, "登录失效");
 
         private final int code;
         private final String msg;

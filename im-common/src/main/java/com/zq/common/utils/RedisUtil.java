@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -697,4 +698,21 @@ public final class RedisUtil {
         }
     }
 
+    /**
+     * 模糊匹配
+     * @param key 键
+     * @return
+     */
+    public Set<String> keys(String key) {
+        return redisTemplate.keys(key);
+    }
+
+    /**
+     * 批量获取
+     * @param keys key collection
+     * @return
+     */
+    public List<Object> mutiGet(Collection<String> keys) {
+        return redisTemplate.opsForValue().multiGet(keys);
+    }
 }
