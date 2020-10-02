@@ -1,2 +1,2 @@
 # b-im
-Instant Message, develop by Java, base on Netty
+Instant Message, based on Netty
