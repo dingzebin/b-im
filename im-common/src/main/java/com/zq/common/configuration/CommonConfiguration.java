@@ -1,5 +1,7 @@
 package com.zq.common.configuration;
 
+import org.I0Itec.zkclient.ZkClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
@@ -14,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 public class CommonConfiguration {
+    @Autowired
+    private ZookeeperConfig zookeeperConfig;
+
     @Bean
     public RestTemplate restTemplate(ClientHttpRequestFactory factory) {
         return new RestTemplate(factory);
@@ -26,4 +31,10 @@ public class CommonConfiguration {
         factory.setConnectTimeout(5000);//单位为ms
         return factory;
     }
+
+    @Bean
+    public ZkClient zkClient() {
+        return new ZkClient(zookeeperConfig.getAddress(), zookeeperConfig.getTimeout());
+    }
+
 }

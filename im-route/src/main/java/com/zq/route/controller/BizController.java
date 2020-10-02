@@ -6,6 +6,8 @@ import com.zq.common.model.UserInfo;
 import com.zq.common.utils.RedisUtil;
 import com.zq.common.utils.Result;
 import com.zq.common.utils.TokenUtil;
+import com.zq.route.manage.ServerInfo;
+import com.zq.route.manage.ServerManage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +34,9 @@ public class BizController {
     @Autowired
     private RedisUtil redisUtil;
 
-    private String url = "http://localhost:";
+    @Autowired
+    private ServerManage serverManage;
+
     /**
      * 发送消息
      * @param messageDTO
@@ -41,7 +45,13 @@ public class BizController {
     @PostMapping("sendMsg")
     public Result sendMsg(@RequestBody MessageDTO messageDTO) {
         restTemplate.setInterceptors(Collections.singletonList(new RestTemplateInterceptor()));
-        ResponseEntity<Result> resultResponseEntity = restTemplate.postForEntity(url, messageDTO, Result.class);
+        ServerInfo serverInfo = serverManage.getServerByAccount(TokenUtil.getLoginUser().getAccount());
+        if (serverInfo == null) {
+            return Result.failed("对方已下线");
+        }
+        ResponseEntity<Result> resultResponseEntity =
+                restTemplate.postForEntity(serverInfo.getHttpUrl() + "/sendMsg",
+                        messageDTO, Result.class);
         return resultResponseEntity.getBody();
     }
 

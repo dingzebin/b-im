@@ -25,10 +25,4 @@ public class IMConfiguration {
     @Value("${im.ws-port}")
     private Integer wsPort;
 
-    /**
-     * app port
-     */
-    @Value("${im.app-port}")
-    private Integer appPort;
-
 }

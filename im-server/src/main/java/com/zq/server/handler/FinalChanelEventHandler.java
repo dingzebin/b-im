@@ -31,8 +31,11 @@ public class FinalChanelEventHandler extends SimpleChannelInboundHandler<Request
             } else {
                 NioSocketChannel channel = SessionHolder.get(account);
                 if (channel != null) {
-
+                   channel.writeAndFlush(Reponse.newInstance(Reponse.ERR, "账号在其他地方登录", null));
+                   channel.close();
                 }
+                SessionHolder.put(account, (NioSocketChannel) ctx.channel());
+                ctx.channel().writeAndFlush(Reponse.newInstance(Reponse.CONNECTED, "账号验证成功", null));
             }
         }
     }

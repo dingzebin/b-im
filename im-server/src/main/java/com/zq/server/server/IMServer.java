@@ -34,10 +34,6 @@ public class IMServer {
     @Autowired
     private IMConfiguration imConfig;
 
-    /** app thread group */
-    private EventLoopGroup appBossGroup;
-    private EventLoopGroup appWorkerGroup;
-
     /** websocket thread group */
     private EventLoopGroup wsBossGroup;
     private EventLoopGroup wsWorkerGroup;
@@ -47,14 +43,10 @@ public class IMServer {
         if (imConfig.getWsPort() != null) {
             this.startWsSocket();
         }
-        if (imConfig.getAppPort() != null) {
-            this.startAppSocket();
-        }
     }
 
     @PreDestroy
     public void destroy() {
-        this.destroy(this.appBossGroup, this.appWorkerGroup);
         this.destroy(this.wsBossGroup, this.wsWorkerGroup);
     }
 
@@ -84,13 +76,6 @@ public class IMServer {
             this.destroy(this.wsBossGroup, this.wsWorkerGroup);
         });
     }
-
-    public void startAppSocket() {
-        log.info("app socket starting..........");
-
-        log.info("app socket started, port({})", imConfig.getWsPort());
-    }
-
 
     private ServerBootstrap createServerBootstrap(EventLoopGroup bossGroup, EventLoopGroup workerGroup) {
         ServerBootstrap bootstrap = new ServerBootstrap();

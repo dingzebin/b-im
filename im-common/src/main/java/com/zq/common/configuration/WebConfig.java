@@ -19,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/login");
+        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns("/route/getRoute");
     }
 
     /**
@@ -38,8 +38,13 @@ public class WebConfig implements WebMvcConfigurer {
         config.addAllowedMethod("*");
         //放行哪些原始域(头部信息)
         config.addAllowedHeader("*");
-        //暴露哪些头部信息（因为跨域访问默认不能获取全部头部信息）
-        config.addExposedHeader("*");
+        config.addExposedHeader("Content-Type");
+        config.addExposedHeader( "X-Requested-With");
+        config.addExposedHeader("accept");
+        config.addExposedHeader("Origin");
+        config.addExposedHeader( "Access-Control-Request-Method");
+        config.addExposedHeader("Access-Control-Request-Headers");
+
         //2.添加映射路径
         UrlBasedCorsConfigurationSource configSource = new UrlBasedCorsConfigurationSource();
         configSource.registerCorsConfiguration("/**", config);

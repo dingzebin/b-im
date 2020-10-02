@@ -16,6 +16,8 @@ public class Reponse<T> {
     public final static int CONNECT_FAILED = -1;
     // 正常消息
     public final static int MSG = 2;
+    // 错误消息
+    public final static int ERR = -2;
 
     private int code;
 

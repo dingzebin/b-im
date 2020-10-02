@@ -10,4 +10,7 @@ public class GlobalConstant {
 
     // token prefix
     public final static String TOKEN_PREFIX = "token_";
+
+    //
+    public final static String USER_SERVER_PREFIX = "user_server_";
 }
